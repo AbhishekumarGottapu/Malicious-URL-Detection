@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malicious URL Predictor</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #116466; 
+    color: #C5C6C7; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container {
+    text-align: center;
+    background-color: #1F2833; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+h1 {
+    margin-bottom: 20px;
+    color: #C5C6C7; 
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+label {
+    margin-bottom: 10px;
+    color: #66FCF1; 
+}
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #C5C6C7; 
+    border-radius: 5px;
+    font-size: 16px;
+    color: #0B0C10; 
+    background-color: #FFFFFF; 
+}
+button {
+    padding: 10px 20px;
+    background-color: #66FCF1;
+    color: #0B0C10; 
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45A29E; 
+}
+.result {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #C5C6C7; 
+    font-weight: bold;
+}
+.result.benign {
+    background-color: #66FCF1; 
+    color: #0B0C10; 
+}
+
+.result.malicious {
+    background-color: #dc3545; 
+    color: #FFFFFF; 
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Check if a URL is Malicious</h1>
+        <form action="/predict" method="post">
+            <label for="url">Enter URL:</label>
+            <input type="text" id="url" name="url" required>
+            <button type="submit">Check</button>
+        </form>
+        {% if prediction %}
+        <div class="result {% if prediction == 'benign' %}benign{% else %}malicious{% endif %}">
+            <h2>Prediction: {{ prediction }}</h2>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
